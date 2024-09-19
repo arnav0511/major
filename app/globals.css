@@ -3,8 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff; /* Light mode background */
-  --foreground: #171717; /* Light mode text color */
+  --background: #F5F5DC; /* Light Beige background */
+  --foreground: #FFFFFF; /* White text color */
+  --primary: #FFA500; /* Bright Orange */
+  --secondary: #20B2AA; /* Soft Teal */
+  --accent: #FF69B4; /* Bright Pink */
+  --destructive: #FF6347; /* Tomato for any destructive actions */
+  --border: #D3D3D3; /* Light border color */
+  --input: #EAEAEA; /* Light input background */
+  --ring: #FFA500; /* Primary color for focus rings */
+  --radius: 0.5rem;
 }
 
 body {
@@ -20,40 +28,43 @@ body {
 }
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--foreground); /* White headings */
+  }
+
+  button {
+    background-color: var(--primary); /* Bright Orange buttons */
+    color: var(--foreground); /* White text on buttons */
+    border-radius: var(--radius);
+  }
+
+  .btn-secondary {
+    background-color: var(--secondary); /* Soft Teal buttons */
+    color: var(--foreground); /* White text on secondary buttons */
+  }
+
+  .btn-accent {
+    background-color: var(--accent); /* Bright Pink buttons */
+    color: var(--foreground); /* White text on accent buttons */
+  }
+
+  input {
+    @apply bg-input text-foreground;
+    border-radius: var(--radius);
+  }
+
+  a {
+    color: var(--primary); /* Bright Orange links */
+  }
+
+  a:hover {
+    color: var(--accent); /* Bright Pink hover for links */
   }
 }
