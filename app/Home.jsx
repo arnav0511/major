@@ -106,7 +106,7 @@ function Home() {
             </CardContent>
             <CardFooter className="p-4 text-center">
               <Link
-                href="/resume-creation"
+                href="/dashboard/resume-creation"
                 className="text-[#FFA500] hover:underline"
               >
                 Get Started
