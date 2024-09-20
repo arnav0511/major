@@ -154,7 +154,7 @@ function Home() {
             </CardContent>
             <CardFooter className="p-4 text-center">
               <Link
-                href="/caption-generation"
+                href="/dashboard/caption-generation"
                 className="text-[#FF69B4] hover:underline"
               >
                 Explore Now

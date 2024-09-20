@@ -64,9 +64,11 @@ function Dashboard() {
                 generator.
               </p>
               <CardFooter className="flex justify-center">
+                <Link href="/dashboard/caption-generation" >
                 <Button className="bg-[#FF69B4] text-white hover:bg-[#20B2AA] transition-transform transform hover:scale-105">
                   Generate Content
                 </Button>
+                </Link>
               </CardFooter>
             </CardContent>
           </Card>

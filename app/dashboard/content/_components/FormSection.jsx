@@ -28,6 +28,22 @@ function FormSection({ onFormChange }) {
     }
   };
 
+  const handleClear = () => {
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      skills: '',
+      certifications: '',
+      projectTitle: '',
+      projectDescription: '',
+      technologiesUsed: '',
+      language: '',
+      proficiency: '',
+      additionalInfo: ''
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form data submitted:', formData);
@@ -67,11 +83,12 @@ function FormSection({ onFormChange }) {
                 padding: '12px',
                 border: '1px solid #ddd',
                 borderRadius: '4px',
-                fontSize: '16px'
+                fontSize: '16px',
+                color: '#000000'
               }}
             />
           </div>
-          
+
           {/* Email */}
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="email" style={{ display: 'block', marginBottom: '5px', fontSize: '16px', color: '#2F4F4F' }}>Email:</label>
@@ -87,7 +104,8 @@ function FormSection({ onFormChange }) {
                 padding: '12px',
                 border: '1px solid #ddd',
                 borderRadius: '4px',
-                fontSize: '16px'
+                fontSize: '16px',
+                color: '#000000'
               }}
             />
           </div>
@@ -107,7 +125,8 @@ function FormSection({ onFormChange }) {
                 padding: '12px',
                 border: '1px solid #ddd',
                 borderRadius: '4px',
-                fontSize: '16px'
+                fontSize: '16px',
+                color: '#000000'
               }}
             />
           </div>
@@ -128,7 +147,8 @@ function FormSection({ onFormChange }) {
                 borderRadius: '4px',
                 fontSize: '16px',
                 minHeight: '120px',
-                resize: 'vertical'
+                resize: 'vertical',
+                color: '#000000'
               }}
             />
           </div>
@@ -148,7 +168,8 @@ function FormSection({ onFormChange }) {
                 padding: '12px',
                 border: '1px solid #ddd',
                 borderRadius: '4px',
-                fontSize: '16px'
+                fontSize: '16px',
+                color: '#000000'
               }}
             />
           </div>
@@ -169,7 +190,8 @@ function FormSection({ onFormChange }) {
                 padding: '12px',
                 border: '1px solid #ddd',
                 borderRadius: '4px',
-                fontSize: '16px'
+                fontSize: '16px',
+                color: '#000000'
               }}
             />
           </div>
@@ -187,7 +209,8 @@ function FormSection({ onFormChange }) {
                 border: '1px solid #ddd',
                 borderRadius: '4px',
                 fontSize: '16px',
-                minHeight: '80px'
+                minHeight: '80px',
+                color: '#000000'
               }}
             />
           </div>
@@ -205,7 +228,8 @@ function FormSection({ onFormChange }) {
                 padding: '12px',
                 border: '1px solid #ddd',
                 borderRadius: '4px',
-                fontSize: '16px'
+                fontSize: '16px',
+                color: '#000000'
               }}
             />
           </div>
@@ -226,12 +250,13 @@ function FormSection({ onFormChange }) {
                 padding: '12px',
                 border: '1px solid #ddd',
                 borderRadius: '4px',
-                fontSize: '16px'
+                fontSize: '16px',
+                color: '#000000'
               }}
             />
           </div>
           <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="proficiency" style={{ display: 'block', marginBottom: '5px', fontSize: '16px', color: '#2F4F4F' }}>Proficiency Level:</label>
+            <label htmlFor="proficiency" style={{ display: 'block', marginBottom: '5px', fontSize: '16px', color: '#2F4F4F' }}>Proficiency:</label>
             <input
               type="text"
               id="proficiency"
@@ -244,7 +269,8 @@ function FormSection({ onFormChange }) {
                 padding: '12px',
                 border: '1px solid #ddd',
                 borderRadius: '4px',
-                fontSize: '16px'
+                fontSize: '16px',
+                color: '#000000'
               }}
             />
           </div>
@@ -258,35 +284,50 @@ function FormSection({ onFormChange }) {
               name="additionalInfo"
               value={formData.additionalInfo}
               onChange={handleChange}
+              required
               style={{
                 width: '100%',
                 padding: '12px',
                 border: '1px solid #ddd',
                 borderRadius: '4px',
                 fontSize: '16px',
-                minHeight: '80px'
+                minHeight: '80px',
+                color: '#000000'
               }}
             />
           </div>
 
-          <button
-            type="submit"
-            style={{
-              width: '100%',
-              padding: '12px',
-              border: 'none',
-              borderRadius: '4px',
-              backgroundColor: '#FFA500',  // Button color
-              color: '#fff',
-              fontSize: '16px',
-              cursor: 'pointer',
-              transition: 'background-color 0.3s ease'
-            }}
-            onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#FF69B4'}
-            onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#FFA500'}
-          >
-            Submit
-          </button>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+            <button
+              type="submit"
+              style={{
+                backgroundColor: '#20B2AA',
+                color: '#FFFFFF',
+                padding: '10px 15px',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontSize: '16px',
+              }}
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              onClick={handleClear}
+              style={{
+                backgroundColor: '#FF69B4',
+                color: '#FFFFFF',
+                padding: '10px 15px',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontSize: '16px',
+              }}
+            >
+              Clear
+            </button>
+          </div>
         </form>
       </div>
     </div>
