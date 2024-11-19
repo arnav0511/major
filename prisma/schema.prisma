@@ -16,6 +16,7 @@ datasource db {
 model Resume{
   id String @id @default(uuid())
   Name String
+  Email String
   Phone String
   Skills String
   Certification String?
