@@ -13,8 +13,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+
 model Resume{
-  id String @id @default(uuid())
+  id String @id 
   Name String
   Email String
   Phone String
