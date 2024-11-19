@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://dbuser:PG0d4QbPp46HHmOq@resume-app.r9kc7.mongodb.net/?retryWrites=true&w=majority&appName=resume-app', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
