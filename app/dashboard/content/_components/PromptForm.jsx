@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@radix-ui/react-label';
 import { Card } from '@/components/ui/card';
+import Link from 'next/link';
 
 function PromptForm() {
   const [caption, setCaption] = useState('');
@@ -15,11 +16,10 @@ function PromptForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Caption submitted:', caption);
-    // You can add functionality to handle the caption here
   };
 
   const handleClear = () => {
-    setCaption(''); // Clear the caption input
+    setCaption(''); 
   };
 
   return (
@@ -37,7 +37,7 @@ function PromptForm() {
         boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
         maxWidth: '500px',
         width: '100%',
-        border: '1px solid #ddd'  // Optional: add a border for separation
+        border: '1px solid #ddd'  
       }}>
         <h3 style={{ marginBottom: '20px', fontSize: '24px', fontWeight: 'bold', color: '#2F4F4F', textAlign: 'center' }}>
           CAPTION GENERATOR
@@ -66,15 +66,17 @@ function PromptForm() {
             />
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Link href="/dashboard/caption-generation/caption-output" >
             <Button
               type="submit"
               style={{
-                width: '48%',
+                width: '100%',
                 padding: '10px',
                 borderRadius: '4px',
                 backgroundColor: '#FFA500',  // Button color
                 color: '#fff',
                 fontSize: '16px',
+                display: 'flex',
                 cursor: 'pointer',
                 transition: 'background-color 0.3s ease'
               }}
@@ -83,6 +85,8 @@ function PromptForm() {
             >
               Submit
             </Button>
+            </Link>
+            
             <Button
               type="button"
               variant="outline" // Use outline variant

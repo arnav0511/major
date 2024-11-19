@@ -46,7 +46,7 @@ function Home() {
         className="w-full h-96 relative flex flex-col justify-center items-center text-center px-5 py-10"
         style={{
           backgroundColor: "#FFA500",
-          color: "#FFFFFF",
+          color: "#2F4F4F",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -56,7 +56,7 @@ function Home() {
           {isSignedIn ? (
             <>
               <Link href="/dashboard">
-                <Button className="bg-white text-[#FFA500] border-none hover:bg-[#FF69B4] hover:text-white transition-transform transform hover:scale-105">
+                <Button className="bg-white text-[#FFA500] border-none hover:bg-[#20B2AA] hover:text-white transition-transform transform hover:scale-105">
                   Go to Dashboard
                 </Button>
               </Link>
@@ -64,7 +64,7 @@ function Home() {
             </>
           ) : (
             <Link href="/auth/sign-in">
-              <Button className="bg-white text-[#FFA500] border-none hover:bg-[#FF69B4] hover:text-white transition-transform transform hover:scale-105">
+              <Button className="bg-white text-[#FFA500] border-none hover:bg-[#20B2AA] hover:text-white transition-transform transform hover:scale-105">
                 Get Started
               </Button>
             </Link>
@@ -85,7 +85,7 @@ function Home() {
       <div className="w-full max-w-7xl mx-auto mt-10 px-4">
         <h2
           className="text-4xl font-semibold mb-8 text-center"
-          style={{ color: "#171717" }}
+          style={{ color: "#2F4F4F" }}
         >
           Explore Our Key Features
         </h2>
@@ -93,11 +93,9 @@ function Home() {
           {/* Card 1: Resume Creation */}
           <Card className="bg-white shadow-lg rounded-lg overflow-hidden">
             <CardHeader className="bg-[#FFA500] text-white p-4 text-center">
-              <CardTitle className="text-xl font-bold">
-                Resume Creation
-              </CardTitle>
+              <CardTitle className="text-xl font-bold">Resume Creation</CardTitle>
             </CardHeader>
-            <CardContent className="p-4 text-gray-800 text-justify">
+            <CardContent className="p-4 text-[#2F4F4F] text-justify">
               <p>
                 Create a professional resume quickly with our easy-to-use
                 templates. Customize your resume to suit your needs and stand
@@ -117,11 +115,9 @@ function Home() {
           {/* Card 2: Resume Optimization */}
           <Card className="bg-white shadow-lg rounded-lg overflow-hidden">
             <CardHeader className="bg-[#20B2AA] text-white p-4 text-center">
-              <CardTitle className="text-xl font-bold">
-                Resume Optimization
-              </CardTitle>
+              <CardTitle className="text-xl font-bold">Resume Optimization</CardTitle>
             </CardHeader>
-            <CardContent className="p-4 text-gray-800 text-justify">
+            <CardContent className="p-4 text-[#2F4F4F] text-justify">
               <p>
                 Enhance your existing resume with tailored optimization
                 suggestions. Improve your resume to align with job descriptions
@@ -145,7 +141,7 @@ function Home() {
                 Caption Generation for LinkedIn
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-4 text-gray-800 text-justify">
+            <CardContent className="p-4 text-[#2F4F4F] text-justify">
               <p>
                 Craft engaging LinkedIn captions effortlessly with our
                 generation tool. Enhance your profile and posts with
@@ -172,10 +168,10 @@ function Home() {
           className="w-full max-w-full mx-auto"
         >
           <AccordionItem value="item-1">
-            <AccordionTrigger className="text-lg font-semibold mb-2 bg-gray-100 text-gray-800 p-4 rounded-md shadow-md hover:bg-gray-200 transition-all text-center">
+            <AccordionTrigger className="text-lg font-semibold mb-2 bg-[#F5F5DC] text-[#2F4F4F] p-4 rounded-md shadow-md hover:bg-[#FFFAF0] transition-all text-center">
               What features does Applica offer?
             </AccordionTrigger>
-            <AccordionContent className="bg-gray-100 text-gray-800 p-4 rounded-md shadow-md text-justify">
+            <AccordionContent className="bg-[#F5F5DC] text-[#2F4F4F] p-4 rounded-md shadow-md text-justify">
               <p>
                 Applica provides tools for creating professional resumes,
                 crafting LinkedIn content, and more. Our platform is designed to
@@ -186,10 +182,10 @@ function Home() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
-            <AccordionTrigger className="text-lg font-semibold mb-2 bg-gray-100 text-gray-800 p-4 rounded-md shadow-md hover:bg-gray-200 transition-all text-center">
+            <AccordionTrigger className="text-lg font-semibold mb-2 bg-[#F5F5DC] text-[#2F4F4F] p-4 rounded-md shadow-md hover:bg-[#FFFAF0] transition-all text-center">
               Is Applica free to use?
             </AccordionTrigger>
-            <AccordionContent className="bg-gray-100 text-gray-800 p-4 rounded-md shadow-md text-justify">
+            <AccordionContent className="bg-[#F5F5DC] text-[#2F4F4F] p-4 rounded-md shadow-md text-justify">
               <p>
                 Yes, Applica offers a range of free features to help you get
                 started with resume building and content creation.
@@ -197,10 +193,10 @@ function Home() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3">
-            <AccordionTrigger className="text-lg font-semibold mb-2 bg-gray-100 text-gray-800 p-4 rounded-md shadow-md hover:bg-gray-200 transition-all text-center">
+            <AccordionTrigger className="text-lg font-semibold mb-2 bg-[#F5F5DC] text-[#2F4F4F] p-4 rounded-md shadow-md hover:bg-[#FFFAF0] transition-all text-center">
               How can I get started?
             </AccordionTrigger>
-            <AccordionContent className="bg-gray-100 text-gray-800 p-4 rounded-md shadow-md text-justify">
+            <AccordionContent className="bg-[#F5F5DC] text-[#2F4F4F] p-4 rounded-md shadow-md text-justify">
               <p>
                 You can start by simply clicking on the Dashboard button on the
                 upper right corner of your screen. This will take you to the
@@ -213,17 +209,17 @@ function Home() {
       </div>
 
       {/* Footer Section */}
-      <footer className="w-full bg-[#20B2AA] text-[#2F4F4F] py-4 mt-10">
+      <footer className="w-full bg-[#FF69B4] text-[#F5F5DC] py-4 mt-10">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           <p className="text-sm">&copy; 2024 Applica. All rights reserved.</p>
-          <div className="flex space-x-4">
-            <Link href="/privacy-policy" className="text-sm hover:underline">
+          <nav className="text-sm space-x-4">
+            <Link href="/privacy" className="hover:underline">
               Privacy Policy
             </Link>
-            <Link href="/terms-of-service" className="text-sm hover:underline">
+            <Link href="/terms" className="hover:underline">
               Terms of Service
             </Link>
-          </div>
+          </nav>
         </div>
       </footer>
     </div>
@@ -231,4 +227,3 @@ function Home() {
 }
 
 export default Home;
-  
