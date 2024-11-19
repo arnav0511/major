@@ -2,10 +2,13 @@
 
 import { redirect } from "next/navigation";
 import { db } from "../lib/database";
+import { auth } from '@clerk/nextjs/server'
 
 export async function ResumeSubmit(formdata) {
+    const userId = auth().userId
     await db.resume.create({
         data: {
+            id: userId,
             Name: formdata.get('name'),
             Email: formdata.get('email'),
             Phone: formdata.get('phone'),

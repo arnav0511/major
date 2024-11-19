@@ -13,14 +13,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id String @id 
-  Email String @unique 
-  resumes Resume[]
-}
+
 
 model Resume{
-  id String @id @default(uuid())
+  id String @id 
   Name String
   Email String
   Phone String
