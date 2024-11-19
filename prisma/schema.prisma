@@ -13,6 +13,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User{
+  id String @id 
+  Email String @unique 
+  resumes Resume[]
+}
+
 model Resume{
   id String @id @default(uuid())
   Name String
@@ -26,4 +32,6 @@ model Resume{
   Languages String?
   Proficiency String?
   Addition_Info String?
+  Userid String
+  user User @relation(fields: [Userid], references: [id])
 }
