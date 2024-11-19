@@ -1,52 +1,12 @@
 "use client";
 import React, { useState } from 'react';
 
-function FormSection({ onFormChange }) {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    skills: '',
-    certifications: '',
-    projectTitle: '',
-    projectDescription: '',
-    technologiesUsed: '',
-    language: '',
-    proficiency: '',
-    additionalInfo: ''
-  });
+function FormSection() {
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    const newFormData = {
-      ...formData,
-      [name]: value
-    };
-    setFormData(newFormData);
-    if (onFormChange) {
-      onFormChange(newFormData);
-    }
-  };
-
-  const handleClear = () => {
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      skills: '',
-      certifications: '',
-      projectTitle: '',
-      projectDescription: '',
-      technologiesUsed: '',
-      language: '',
-      proficiency: '',
-      additionalInfo: ''
-    });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form data submitted:', formData);
+    console.log('Form data submitted:');
   };
 
   return (
@@ -67,7 +27,7 @@ function FormSection({ onFormChange }) {
         border: '1px solid #ddd'  // Border for separation
       }}>
         <h2 style={{ marginBottom: '20px', fontSize: '24px', fontWeight: 'bold', color: '#2F4F4F', textAlign: 'center' }}>Enter Your Details</h2>
-        <form onSubmit={handleSubmit}>
+        <form action = {ResumeSubmit}>
           {/* Name */}
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="name" style={{ display: 'block', marginBottom: '5px', fontSize: '16px', color: '#2F4F4F' }}>Name:</label>
