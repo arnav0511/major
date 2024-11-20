@@ -9,20 +9,25 @@ import Link from "next/link";
 function PromptOutput({ userCaption }) {
   const [generatedCaption, setGeneratedCaption] = useState("");
   const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState("");
+  console.log(userCaption.caption);
 
   useEffect(() => {
     const generateCaption = async () => {
       setLoading(true);
       try {
-        const response = await chatSession.send({
-          role: "user",
-          parts: [{ text: userCaption }]
-        });
+        const response = await chatSession.sendMessage(
+          JSON.stringify({
+            role: "user",
+            parts: [{ text: userCaption.caption }],
+          })
+        );
 
-        console.log("API Response:", response); 
-
-        const generatedResponse = response.history[response.history.length - 1].parts[0].text;
-        console.log("Generated Caption:", generatedResponse); 
+        console.log("API Response:", response);
+        setResponse(response);
+        const generatedResponse =
+          response.history[response.history.length - 1].parts[0].text;
+        console.log("Generated Caption:", generatedResponse);
 
         setGeneratedCaption(generatedResponse);
       } catch (error) {
@@ -59,15 +64,24 @@ function PromptOutput({ userCaption }) {
           textAlign: "center",
         }}
       >
-        <h3 style={{ marginBottom: "20px", fontSize: "24px", fontWeight: "bold", color: "#2F4F4F" }}>
+        <h3
+          style={{
+            marginBottom: "20px",
+            fontSize: "24px",
+            fontWeight: "bold",
+            color: "#2F4F4F",
+          }}
+        >
           Generated LinkedIn Caption
         </h3>
-
-        {loading ? (
+        {response.text}
+        {/* {loading ? (
           <p>Generating caption...</p>
         ) : (
-          <p style={{ fontSize: "16px", color: "#2F4F4F" }}>{generatedCaption}</p>
-        )}
+          <p style={{ fontSize: "16px", color: "#2F4F4F" }}>
+            {generatedCaption}
+          </p>
+        )} */}
 
         <Link href="/dashboard/caption-generation">
           <Button
