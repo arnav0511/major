@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { chatSession } from "@/utils/CaptionGenerator"; // Importing the Gemini API function
+import { chatSession } from "@/utils/CaptionGenerator";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -9,27 +9,43 @@ import Link from "next/link";
 function PromptOutput({ userCaption }) {
   const [generatedCaption, setGeneratedCaption] = useState("");
   const [loading, setLoading] = useState(false);
-  const [response, setResponse] = useState("");
-  console.log(userCaption.caption);
 
   useEffect(() => {
     const generateCaption = async () => {
+      if (!userCaption || !userCaption.caption) {
+        setGeneratedCaption("No input provided. Please try again.");
+        return;
+      }
+
       setLoading(true);
       try {
-        const response = await chatSession.sendMessage(
-          JSON.stringify({
-            role: "user",
-            parts: [{ text: userCaption.caption }],
-          })
-        );
+        const payload = {
+          role: "user",
+          parts: [{ text: userCaption.caption }],
+        };
+        console.log("Payload Sent:", JSON.stringify(payload, null, 2));
 
-        console.log("API Response:", response);
-        setResponse(response);
+        const response = await chatSession.sendMessage(JSON.stringify(payload));
+        console.log("Full API Response:", JSON.stringify(response, null, 2));
+
+        if (!response || response.error) {
+          setGeneratedCaption(
+            response.error?.message || "The API returned an error or no data."
+          );
+          return;
+        }
+
+        // Adjusted response handling based on your logged structure
         const generatedResponse =
-          response.history[response.history.length - 1].parts[0].text;
-        console.log("Generated Caption:", generatedResponse);
+          response?.response?.candidates?.[0]?.content?.parts?.[0]?.text;
 
-        setGeneratedCaption(generatedResponse);
+        console.log("Generated Caption:", generatedResponse); // Debug: Log the generated caption
+
+        if (generatedResponse) {
+          setGeneratedCaption(generatedResponse);
+        } else {
+          setGeneratedCaption("Unable to generate caption. Check API response.");
+        }
       } catch (error) {
         console.error("Error generating caption:", error);
         setGeneratedCaption("Error generating caption. Please try again.");
@@ -38,9 +54,7 @@ function PromptOutput({ userCaption }) {
       }
     };
 
-    if (userCaption) {
-      generateCaption();
-    }
+    generateCaption();
   }, [userCaption]);
 
   return (
@@ -74,14 +88,14 @@ function PromptOutput({ userCaption }) {
         >
           Generated LinkedIn Caption
         </h3>
-        {response.text}
-        {/* {loading ? (
+
+        {loading ? (
           <p>Generating caption...</p>
         ) : (
           <p style={{ fontSize: "16px", color: "#2F4F4F" }}>
-            {generatedCaption}
+            {generatedCaption || "No caption generated yet."}
           </p>
-        )} */}
+        )}
 
         <Link href="/dashboard/caption-generation">
           <Button
