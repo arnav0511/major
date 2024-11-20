@@ -1,15 +1,14 @@
 import { db } from "@/lib/database";
 import { auth } from "@clerk/nextjs/server";
 import React from "react";
-
+import ResumeOutput from '../content/_components/ResumeOutput'
 export default async function History() {
   const userId = auth().userId;
   const resumes = await db.resume.findMany({
     where: {
-      id: userId,
+      userId: userId,
     },
   });
-
   return (
     <>
       <div className="text-black text-3xl text-center font-bold">
@@ -33,6 +32,7 @@ export default async function History() {
               <p>Languages: {resume.Languages}</p>
               <p>Proficiency: {resume.Proficiency}</p>
               <p>Additional Info: {resume.Addition_Info}</p>
+              {/* <ResumeOutput userProject={resume.Project_Description}/> */}
             </div>
           ))
         ) : (

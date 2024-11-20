@@ -1,111 +1,82 @@
-import React from 'react';
+"use client";
 
-function ResumeOutput({ resumeData }) {
-  const containerStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    backgroundColor: '#f5f5dc', // Light Beige
-  };
+import React, { useState, useEffect } from "react";
+import { chatSession } from "@/utils/ResumeBuilder";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-  const outputStyle = {
-    width: '80%', // Increased width to resemble a word document
-    padding: '40px', // Added padding for more space
-    backgroundColor: '#fff',
-    fontFamily: 'Calibri, sans-serif', // Changed font to resemble a document
-    lineHeight: '1.8',
-    color: '#333', // Dark text color for readability
-    margin: '0 auto', // Centered the content
-  };
+function ResumeOutput({ userProject }) {
+  const [generatedCaption, setGeneratedCaption] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const headerStyle = {
-    color: '#2f4f4f', // Dark Slate
-    fontSize: '24px', // Larger font size for headers
-    fontWeight: 'bold',
-  };
+  useEffect(() => {
+    const generateCaption = async () => {
+      if (!userProject || !userProject.project_desc) {
+        setGeneratedCaption("No input provided. Please try again.");
+        return;
+      }
 
-  const subHeaderStyle = {
-    color: '#2f4f4f',
-    fontSize: '20px', // Slightly smaller subheaders
-    fontWeight: 'bold',
-    marginTop: '20px',
-  };
+      setLoading(true);
+      try {
+        const payload = {
+          role: "user",
+          parts: [{ text: userProject.project_desc }], // Fix the key name
+        };
+        console.log("Payload Sent:", JSON.stringify(payload, null, 2));
 
-  const listStyle = {
-    paddingLeft: '40px', // Indented list
-  };
+        const response = await chatSession.sendMessage(JSON.stringify(payload));
+        console.log("Full API Response:", JSON.stringify(response, null, 2));
+
+        if (!response || response.error) {
+          setGeneratedCaption(
+            response.error?.message || "The API returned an error or no data."
+          );
+          return;
+        }
+
+        // Adjusted response handling based on your logged structure
+        const generatedResponse =
+          response?.response?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        console.log("Generated Caption:", generatedResponse);
+
+        if (generatedResponse) {
+          setGeneratedCaption(generatedResponse);
+        } else {
+          setGeneratedCaption("Unable to generate caption. Check API response.");
+        }
+      } catch (error) {
+        console.error("Error generating caption:", error);
+        setGeneratedCaption("Error generating caption. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    generateCaption();
+  }, [userProject]);
 
   return (
-    <div style={containerStyle}>
-      <div style={outputStyle}>
-        {/* Personal Information */}
-        <h1 style={headerStyle}>{resumeData.fullName}</h1>
-        <p>{resumeData.address} | {resumeData.phoneNumber} | {resumeData.email}</p>
-
-        {/* Professional Summary */}
-        <h2 style={subHeaderStyle}>Professional Summary</h2>
-        <p>{resumeData.summary}</p>
-
-        {/* Work Experience */}
-        <h2 style={subHeaderStyle}>Work Experience</h2>
-        {resumeData.workExperience && resumeData.workExperience.map((job, index) => (
-          <div key={index}>
-            <h3 style={headerStyle}>{job.title} - {job.company}</h3>
-            <p>{job.location} | {job.dates}</p>
-            <ul style={listStyle}>
-              {job.responsibilities && job.responsibilities.map((responsibility, idx) => (
-                <li key={idx}>{responsibility}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-
-        {/* Education */}
-        <h2 style={subHeaderStyle}>Education</h2>
-        <p>{resumeData.degree} in {resumeData.major}</p>
-        <p>{resumeData.institution}</p>
-        <p>{resumeData.graduationDate}</p>
-
-        {/* Skills */}
-        <h2 style={subHeaderStyle}>Skills</h2>
-        <ul style={listStyle}>
-          {resumeData.skills && resumeData.skills.map((skill, index) => (
-            <li key={index}>{skill}</li>
-          ))}
-        </ul>
-
-        {/* Certifications */}
-        <h2 style={subHeaderStyle}>Certifications</h2>
-        {resumeData.certifications && resumeData.certifications.map((certification, index) => (
-          <div key={index}>
-            <p>{certification.name} - {certification.organization}</p>
-            <p>{certification.date}</p>
-          </div>
-        ))}
-
-        {/* Projects */}
-        <h2 style={subHeaderStyle}>Projects</h2>
-        {resumeData.projects && resumeData.projects.map((project, index) => (
-          <div key={index}>
-            <h3 style={headerStyle}>{project.title}</h3>
-            <p>{project.description}</p>
-            <p>{project.technologies}</p>
-          </div>
-        ))}
-
-        {/* Languages */}
-        <h2 style={subHeaderStyle}>Languages</h2>
-        {resumeData.languages && resumeData.languages.map((language, index) => (
-          <p key={index}>{language.name}: {language.proficiency}</p>
-        ))}
-
-        {/* Additional Information */}
-        <h2 style={subHeaderStyle}>Additional Information</h2>
-        <p>{resumeData.additionalInfo}</p>
-      </div>
+    <div className="text-black p-4">
+      <Card className="shadow-md p-6 rounded-lg bg-white max-w-2xl mx-auto">
+        <h2 className="text-xl font-bold mb-4">Generated Caption</h2>
+        {loading ? (
+          <div className="text-center text-gray-500">Generating caption...</div>
+        ) : (
+          <div className="text-gray-700">{generatedCaption}</div>
+        )}
+        <div className="mt-4 text-center">
+          <Link href="/" passHref>
+            <Button variant="outline" className="mt-2">
+              Go Back
+            </Button>
+          </Link>
+        </div>
+      </Card>
     </div>
   );
 }
 
 export default ResumeOutput;
+  

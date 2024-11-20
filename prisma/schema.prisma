@@ -16,7 +16,8 @@ datasource db {
 
 
 model Resume{
-  id String @id 
+  id String @id @default(cuid())
+  userId String 
   Name String
   Email String
   Phone String
@@ -28,6 +29,4 @@ model Resume{
   Languages String?
   Proficiency String?
   Addition_Info String?
-  Userid String
-  user User @relation(fields: [Userid], references: [id])
 }

@@ -8,7 +8,7 @@ export async function ResumeSubmit(formdata) {
     const userId = auth().userId
     await db.resume.create({
         data: {
-            id: userId,
+            userId: userId,
             Name: formdata.get('name'),
             Email: formdata.get('email'),
             Phone: formdata.get('phone'),
